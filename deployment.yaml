@@ -25,4 +25,16 @@ spec:
         name: myapp
         ports:
         - containerPort: 80
-          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 80
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 80
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 80
+    
