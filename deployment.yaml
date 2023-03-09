@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deploy
+  labels:
+    app: myapp-deploy
+spec:
+  strategy:         
+    type: RollingUpdate  
+    rollingUpdate:
+      maxUnavailable: 1   
+      maxSurge: 1         
+  minReadySeconds: 20
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp-deploy
+  template:
+    metadata:
+      labels:
+        app: myapp-deploy
+    spec:
+      containers:
+      - image: wordpress:5.9.1-php8.1-apache
+        name: myapp
+        ports:
+        - containerPort: 80
+          protocol: TCP
