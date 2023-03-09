@@ -28,6 +28,10 @@ spec:
         volumeMounts:
         - name: web-content
           mountPath: /var/www/html
+        resources:
+          requests:
+            cpu: 50m
+            memory: 10Mi
         livenessProbe:
           httpGet:
             path: /health
@@ -39,7 +43,7 @@ spec:
         startupProbe:
           httpGet:
             path: /health
-            port: 80 
+            port: 80
       volumes:
       - name: web-content
         persistentVolumeClaim:
